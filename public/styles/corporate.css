@@ -1,8 +1,8 @@
 /* ============================================
-   KURAGE by 海月舎  v16 — Chaotic Magazine Style
-   — omocoro-inspired visual richness
-   — Section-specific backgrounds & color shifts
-   — High visual density, bold personality
+   KURAGE by 海月舎  v17 — WILD Magazine Style
+   — Maximum visual chaos, every section different
+   — Patterns, gradients, decorative shapes
+   — No section looks the same
    ============================================ */
 
 /* ── MAGAZINE PALETTE ── */
@@ -193,6 +193,10 @@ a { color: inherit; text-decoration: none; }
   padding: 36px 0;
   text-align: center;
   overflow: hidden;
+  background:
+    radial-gradient(ellipse 40% 80% at 30% 50%, rgba(199,91,57,.03) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 80% at 70% 50%, rgba(74,124,138,.03) 0%, transparent 50%),
+    var(--bg);
 }
 .kurage-index::before {
   content: 'KURAGE';
@@ -205,12 +209,23 @@ a { color: inherit; text-decoration: none; }
   line-height: 1;
   user-select: none;
 }
+.kurage-index::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  border: 1px solid rgba(45,45,45,.03);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
 .kurage-index__divider {
   width: 60px; height: 1px;
   background: var(--mute);
   margin: 0 auto;
   position: relative;
   top: -0.4em;
+  z-index: 1;
 }
 
 
@@ -343,8 +358,23 @@ a { color: inherit; text-decoration: none; }
   flex-direction: column;
   align-items: center;
   overflow: hidden;
-  background: var(--bg);
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 20%, rgba(74,124,138,.1) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 70%, rgba(199,91,57,.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 50% 90%, rgba(107,107,138,.06) 0%, transparent 50%),
+    var(--bg);
 }
+/* Decorative circles */
+.z--hero::after {
+  content: '';
+  position: absolute;
+  top: -60px; right: -80px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  border: 2px solid rgba(199,91,57,.06);
+  pointer-events: none;
+}
+
 
 .hero-brand {
   text-align: center;
@@ -555,8 +585,26 @@ a { color: inherit; text-decoration: none; }
    ══════════════════════════════════ */
 .z--new {
   padding: 80px 0;
-  background: var(--bg-card);
-  border-top: 3px solid var(--accent);
+  background:
+    radial-gradient(circle at 0% 100%, rgba(90,138,107,.06) 0%, transparent 40%),
+    radial-gradient(circle at 100% 0%, rgba(199,91,57,.05) 0%, transparent 40%),
+    url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='%232D2D2D' fill-opacity='.03'/%3E%3C/svg%3E"),
+    var(--bg-card);
+  border-top: 4px solid var(--accent);
+}
+/* Oversized label watermark */
+.z--new::before {
+  content: 'NEW';
+  position: absolute;
+  top: -10px; left: 5%;
+  font-family: var(--title);
+  font-size: clamp(100px, 20vw, 280px);
+  font-weight: 900;
+  color: rgba(199,91,57,.03);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: .05em;
 }
 .new-grid {
   display: grid;
@@ -580,10 +628,15 @@ a { color: inherit; text-decoration: none; }
    ══════════════════════════════════ */
 .z--categories {
   padding: 80px 0;
-  background: var(--bg-dark);
+  background:
+    radial-gradient(ellipse 50% 80% at 0% 50%, rgba(74,124,138,.15) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 100% 20%, rgba(107,107,138,.12) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 50% at 60% 100%, rgba(139,107,107,.1) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 20h40M20 0v40' stroke='%23ffffff' stroke-opacity='.03' stroke-width='.5'/%3E%3C/svg%3E"),
+    var(--bg-dark);
   color: var(--text-light);
 }
-/* Diagonal stripe decoration */
+/* Multi-color top stripe */
 .z--categories::before {
   content: '';
   position: absolute;
@@ -597,6 +650,17 @@ a { color: inherit; text-decoration: none; }
     var(--np) 120px, var(--np) 160px,
     var(--ng) 160px, var(--ng) 200px
   );
+  z-index: 2;
+}
+/* Large decorative circle */
+.z--categories::after {
+  content: '';
+  position: absolute;
+  bottom: -100px; right: -60px;
+  width: 350px; height: 350px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,.05);
+  pointer-events: none;
 }
 .z--categories .sec-head {
   border-bottom-color: rgba(255,255,255,.15);
@@ -672,8 +736,13 @@ a { color: inherit; text-decoration: none; }
    ══════════════════════════════════ */
 .z--ranking {
   padding: 80px 0;
-  background: var(--bg-warm);
-  border-top: 3px solid var(--np);
+  background:
+    radial-gradient(ellipse 70% 50% at 90% 30%, rgba(139,107,107,.12) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 60% at 10% 80%, rgba(199,91,57,.08) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 40% at 50% 10%, rgba(90,138,107,.06) 0%, transparent 40%),
+    url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 15L15 0M15 30L30 15M0 15L15 30M15 0L30 15' stroke='%238B6B6B' stroke-opacity='.04' stroke-width='.5' fill='none'/%3E%3C/svg%3E"),
+    var(--bg-warm);
+  border-top: 4px solid var(--np);
 }
 /* Decorative big number watermark */
 .z--ranking::after {
@@ -687,6 +756,16 @@ a { color: inherit; text-decoration: none; }
   line-height: 1;
   pointer-events: none;
   user-select: none;
+}
+/* Decorative diamond shape */
+.z--ranking::before {
+  content: '';
+  position: absolute;
+  bottom: -40px; left: -40px;
+  width: 200px; height: 200px;
+  border: 2px solid rgba(139,107,107,.06);
+  transform: rotate(45deg);
+  pointer-events: none;
 }
 .rank-list {
   display: flex;
@@ -835,7 +914,37 @@ a { color: inherit; text-decoration: none; }
    ══════════════════════════════════ */
 .z--about {
   padding: 80px 0;
-  background: var(--bg-card);
+  background:
+    radial-gradient(ellipse 60% 50% at 95% 20%, rgba(74,124,138,.07) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 60% at 5% 80%, rgba(199,91,57,.05) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 30% at 50% 50%, rgba(107,107,138,.04) 0%, transparent 40%),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='28' stroke='%232D2D2D' stroke-opacity='.02' stroke-width='.5' fill='none'/%3E%3C/svg%3E"),
+    var(--bg-card);
+  border-top: 3px solid var(--nc);
+}
+/* Decorative large ring */
+.z--about::after {
+  content: '';
+  position: absolute;
+  top: -80px; left: -60px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  border: 2px solid rgba(74,124,138,.05);
+  pointer-events: none;
+}
+/* Oversized watermark */
+.z--about::before {
+  content: 'ABOUT';
+  position: absolute;
+  bottom: 20px; right: 5%;
+  font-family: var(--title);
+  font-size: clamp(80px, 18vw, 220px);
+  font-weight: 900;
+  color: rgba(74,124,138,.025);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: .05em;
 }
 .about-grid {
   display: grid;
@@ -893,21 +1002,45 @@ a { color: inherit; text-decoration: none; }
 .z--call {
   padding: 100px 5%;
   text-align: center;
-  background: var(--accent);
+  background:
+    radial-gradient(ellipse 60% 80% at 20% 20%, rgba(255,255,255,.12) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 60% at 80% 80%, rgba(0,0,0,.1) 0%, transparent 50%),
+    radial-gradient(ellipse 30% 40% at 60% 10%, rgba(255,200,150,.08) 0%, transparent 40%),
+    var(--accent);
   color: #fff;
 }
-/* Diagonal pattern */
+/* Aggressive diagonal stripes + dots */
 .z--call::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(
-    -45deg,
-    transparent 0px,
-    transparent 20px,
-    rgba(255,255,255,.03) 20px,
-    rgba(255,255,255,.03) 40px
-  );
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      transparent 0px,
+      transparent 14px,
+      rgba(255,255,255,.05) 14px,
+      rgba(255,255,255,.05) 28px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      transparent 0px,
+      transparent 30px,
+      rgba(0,0,0,.03) 30px,
+      rgba(0,0,0,.03) 60px
+    ),
+    url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='1.5' fill='%23ffffff' fill-opacity='.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+/* Large decorative ring */
+.z--call::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.06);
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }
 .call-title {
@@ -948,7 +1081,38 @@ a { color: inherit; text-decoration: none; }
    ══════════════════════════════════ */
 .z--vessels {
   padding: 80px 0;
-  background: var(--bg-warm);
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(139,107,107,.08) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 70% at 20% 80%, rgba(90,138,107,.06) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(199,91,57,.04) 0%, transparent 40%),
+    url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0L40 20L20 40L0 20Z' stroke='%238B6B6B' stroke-opacity='.03' stroke-width='.5' fill='none'/%3E%3C/svg%3E"),
+    var(--bg-warm);
+  border-top: 4px solid var(--ngo);
+}
+/* Oversized STAFF watermark */
+.z--vessels::before {
+  content: 'STAFF';
+  position: absolute;
+  top: -5px; left: 5%;
+  font-family: var(--title);
+  font-size: clamp(80px, 18vw, 220px);
+  font-weight: 900;
+  color: rgba(138,122,90,.03);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: .08em;
+}
+/* Decorative triangle */
+.z--vessels::after {
+  content: '';
+  position: absolute;
+  bottom: -30px; right: 5%;
+  width: 0; height: 0;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-bottom: 170px solid rgba(138,122,90,.03);
+  pointer-events: none;
 }
 .vessels-grid {
   display: flex; flex-wrap: wrap; justify-content: center; gap: 36px;
@@ -1008,8 +1172,38 @@ a { color: inherit; text-decoration: none; }
 .z--signal {
   padding: 80px 5%;
   text-align: center;
-  background: var(--bg-dark);
+  background:
+    radial-gradient(ellipse 70% 60% at 15% 30%, rgba(74,124,138,.18) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 50% at 85% 70%, rgba(107,107,138,.15) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 40% at 50% 10%, rgba(199,91,57,.08) 0%, transparent 40%),
+    url("data:image/svg+xml,%3Csvg width='50' height='50' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='25' cy='25' r='1' fill='%23ffffff' fill-opacity='.04'/%3E%3Cpath d='M25 0v50M0 25h50' stroke='%23ffffff' stroke-opacity='.02' stroke-width='.3'/%3E%3C/svg%3E"),
+    var(--bg-dark);
   color: var(--text-light);
+  border-top: 4px solid var(--nv);
+}
+/* Large decorative ring */
+.z--signal::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -60px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,.04);
+  pointer-events: none;
+}
+/* CONTACT watermark */
+.z--signal::after {
+  content: 'CONTACT';
+  position: absolute;
+  bottom: 10px; left: 5%;
+  font-family: var(--title);
+  font-size: clamp(60px, 14vw, 160px);
+  font-weight: 900;
+  color: rgba(255,255,255,.02);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: .08em;
 }
 .signal-title {
   font-family: var(--serif);
@@ -1042,9 +1236,38 @@ a { color: inherit; text-decoration: none; }
 .ft {
   position: relative;
   padding: 72px 32px 36px;
-  border-top: 1px solid var(--mute);
-  background: var(--bg-card-alt);
+  border-top: none;
+  background:
+    radial-gradient(ellipse 50% 60% at 10% 30%, rgba(74,124,138,.04) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 60% at 90% 70%, rgba(199,91,57,.03) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='15' cy='15' r='.5' fill='%232D2D2D' fill-opacity='.03'/%3E%3C/svg%3E"),
+    var(--bg-card-alt);
   text-align: center;
+  overflow: hidden;
+}
+/* Multi-color top border */
+.ft::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--accent) 0px, var(--accent) 50px,
+    var(--nc) 50px, var(--nc) 100px,
+    var(--ng) 100px, var(--ng) 150px,
+    var(--nv) 150px, var(--nv) 200px,
+    var(--np) 200px, var(--np) 250px
+  );
+}
+.ft::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; right: -40px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(45,45,45,.03);
+  pointer-events: none;
 }
 .ft__brand {
   font-family: var(--title);
