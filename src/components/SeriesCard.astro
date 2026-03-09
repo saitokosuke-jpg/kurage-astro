@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { CATEGORIES } from '../lib/categories';
+
+interface Props {
+  series: CollectionEntry<'series'>;
+  publishedEpisodes: number;
+  latestEpisodeTitle?: string;
+}
+const { series, publishedEpisodes, latestEpisodeTitle } = Astro.props;
+const cat = CATEGORIES[series.data.category];
+const progress = Math.round((publishedEpisodes / series.data.totalEpisodes) * 100);
+---
+<a href="/magazine" class="series-card">
+  <div class="series-card__img"><div class="series-card__placeholder"></div></div>
+  <div class="series-card__content">
+    <div class="series-card__top">
+      <span class="series-card__cat" style={`color:${cat.color};border:1px solid rgba(${cat.colorRgb},.3)`}>{cat.ja}連載</span>
+      <span class="series-card__ep">第 {publishedEpisodes} 話 / 全 {series.data.totalEpisodes} 話</span>
+    </div>
+    <h3 class="series-card__name">{series.data.title}</h3>
+    <p class="series-card__author">{series.data.author}</p>
+    <div class="series-card__bar">
+      <div class="series-card__fill" style={`width:${progress}%;background:${cat.color}`}></div>
+    </div>
+    {latestEpisodeTitle && (
+      <p class="series-card__latest">最新: 第{publishedEpisodes}話「{latestEpisodeTitle}」</p>
+    )}
+  </div>
+</a>

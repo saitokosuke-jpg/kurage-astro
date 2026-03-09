@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { CATEGORIES } from '../lib/categories';
+
+interface Props {
+  article: CollectionEntry<'articles'>;
+}
+const { article } = Astro.props;
+const cat = CATEGORIES[article.data.category];
+const dateStr = article.data.date.toISOString().slice(0, 10).replace(/-/g, '.');
+---
+<a href={`/articles/${article.slug}`} class="article-card">
+  <div class="article-card__img">
+    {article.data.coverImage ? (
+      <img src={article.data.coverImage} alt={article.data.title} style="width:100%;height:100%;object-fit:cover;">
+    ) : (
+      <div class="article-card__placeholder"></div>
+    )}
+  </div>
+  <div class="article-card__body">
+    <span class="article-card__cat" style={`color:${cat.color}`}>{cat.ja}</span>
+    <h3 class="article-card__title">{article.data.title}</h3>
+    <p class="article-card__excerpt">{article.data.excerpt}</p>
+    <p class="article-card__meta">{article.data.author} ・ {article.data.readingMinutes}分 ・ {dateStr}</p>
+  </div>
+</a>

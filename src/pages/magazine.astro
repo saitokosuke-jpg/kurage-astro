@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import MobileMenu from '../components/MobileMenu.astro';
+import Footer from '../components/Footer.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+
+const allArticles = (await getCollection('articles'))
+  .filter(a => !a.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+<BaseLayout title="マガジン | KURAGE by 海月舎" description="KURAGEのすべての記事を一覧で。">
+  <Header />
+  <MobileMenu />
+
+  <div class="pg-hero">
+    <div class="sec-head" style="max-width:1200px;margin:0 auto;padding:0 5% 16px;">
+      <span class="sec-head__label">Magazine</span>
+      <h1 class="sec-head__title">マガジン</h1>
+    </div>
+  </div>
+
+  <section class="z z--new" style="padding-top:40px;">
+    <div class="new-grid">
+      {allArticles.map(a => <ArticleCard article={a} />)}
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

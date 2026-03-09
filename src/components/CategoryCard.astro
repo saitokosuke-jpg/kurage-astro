@@ -1,0 +1,20 @@
+---
+import type { CategoryKey } from '../lib/categories';
+import { CATEGORIES } from '../lib/categories';
+
+interface Props {
+  categoryKey: CategoryKey;
+  count: number;
+}
+const { categoryKey, count } = Astro.props;
+const cat = CATEGORIES[categoryKey];
+---
+<div class="cat-card">
+  <div class="cat-card__img"><div class="cat-card__placeholder"></div></div>
+  <div class="cat-card__content">
+    <span class="cat-card__label" style={`color:${cat.color}`}>{cat.ja}</span>
+    <p class="cat-card__desc">{cat.desc}</p>
+    <span class="cat-card__count">{count} 作品</span>
+    <a href="/magazine" class="cat-card__link">{cat.ja}を読む →</a>
+  </div>
+</div>

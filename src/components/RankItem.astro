@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { CATEGORIES } from '../lib/categories';
+
+interface Props {
+  article: CollectionEntry<'articles'>;
+  rank: number;
+}
+const { article, rank } = Astro.props;
+const cat = CATEGORIES[article.data.category];
+const rankStr = String(rank).padStart(2, '0');
+const views = article.data.rankingViews?.toLocaleString() ?? '0';
+---
+<a href={`/articles/${article.slug}`} class="rank-item">
+  <span class="rank-num">{rankStr}</span>
+  <div class="rank-thumb">
+    {article.data.coverImage ? (
+      <img src={article.data.coverImage} alt={article.data.title} style="width:100%;height:100%;object-fit:cover;">
+    ) : (
+      <div class="rank-thumb__placeholder"></div>
+    )}
+  </div>
+  <div class="rank-body">
+    <span class="rank-cat" style={`color:${cat.color}`}>{cat.ja}</span>
+    <h3 class="rank-item__title">{article.data.title}</h3>
+    <p class="rank-meta">{article.data.author} ・ {article.data.readingMinutes}分 ・ {views} views</p>
+  </div>
+</a>

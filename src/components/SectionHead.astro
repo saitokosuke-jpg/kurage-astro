@@ -1,0 +1,14 @@
+---
+interface Props {
+  label: string;
+  title: string;
+  moreHref?: string;
+  moreText?: string;
+}
+const { label, title, moreHref, moreText = '一覧へ' } = Astro.props;
+---
+<div class="sec-head">
+  <span class="sec-head__label">{label}</span>
+  <h2 class="sec-head__title">{title}</h2>
+  {moreHref && <a href={moreHref} class="sec-head__more">{moreText} →</a>}
+</div>

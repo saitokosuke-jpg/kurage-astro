@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { CATEGORIES } from '../lib/categories';
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import MobileMenu from '../components/MobileMenu.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  article: CollectionEntry<'articles'>;
+}
+const { article } = Astro.props;
+const cat = CATEGORIES[article.data.category];
+const dateStr = article.data.date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+<BaseLayout title={`${article.data.title} | KURAGE by 海月舎`} description={article.data.excerpt}>
+  <Header />
+  <MobileMenu />
+
+  <div class="art-hero">
+    <div class="art-hero__in">
+      <span class="art-hero__cat" style={`color:${cat.color}`}>{cat.ja}</span>
+      <h1 class="art-hero__title">{article.data.title}</h1>
+      <div class="art-hero__meta">
+        <div class="art-hero__av"></div>
+        <div>
+          <div class="art-hero__name">{article.data.author}</div>
+          <span>{dateStr} ・ 約{article.data.readingMinutes}分で読めます</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="art__body">
+    <slot />
+  </div>
+
+  <div class="auth-box">
+    <div class="auth-box__av"></div>
+    <div>
+      <p class="auth-box__name">{article.data.author}</p>
+      <p class="auth-box__bio">KURAGEで執筆中。</p>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

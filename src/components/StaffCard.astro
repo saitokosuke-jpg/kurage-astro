@@ -1,0 +1,14 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  member: CollectionEntry<'staff'>;
+}
+const { member } = Astro.props;
+---
+<div class="vessel">
+  <div class="vessel__photo"><img src={member.data.photo} alt={member.data.name}></div>
+  <h3 class="vessel__name">{member.data.name}</h3>
+  <span class="vessel__role">{member.data.roleEn}</span>
+  <p class="vessel__bio">{member.data.bio}</p>
+</div>
