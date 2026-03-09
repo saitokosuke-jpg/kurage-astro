@@ -108,7 +108,9 @@ const staff = (await getCollection('staff'))
   <!-- Vessels (Staff) -->
   <section class="z z--vessels" id="vessels">
     <SectionHead label="STAFF" title="スタッフ一覧" />
-    {staff.map(m => <StaffCard member={m} />)}
+    <div class="vessels-grid">
+      {staff.map(m => <StaffCard member={m} />)}
+    </div>
   </section>
 
   <KurageIndex />

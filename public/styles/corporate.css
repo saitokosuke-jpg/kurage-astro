@@ -862,9 +862,13 @@ a { color: inherit; text-decoration: none; }
    ZONE: VESSELS — Staff
    ══════════════════════════════════ */
 .z--vessels {
-  min-height: auto;
+  padding: 0 0 var(--section-gap);
+}
+.vessels-grid {
   display: flex; flex-wrap: wrap; justify-content: center; gap: 36px;
-  padding: 0 5% var(--section-gap);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 5%;
 }
 .vessel {
   position: relative;
@@ -1105,10 +1109,13 @@ a { color: inherit; text-decoration: none; }
 
   /* ─── VESSELS ─── */
   .z--vessels {
+    padding: 0 0 var(--section-gap-mobile);
+  }
+  .vessels-grid {
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    padding: 0 6% var(--section-gap-mobile);
+    padding: 0 6%;
   }
   .vessel {
     width: 100%;
