@@ -14,6 +14,9 @@ export default defineConfig({
     markdoc(),
     keystatic(),
   ],
+  server: {
+    allowedHosts: ['kurage-astro.vercel.app'],
+  },
   build: {
     format: 'directory',
   },
