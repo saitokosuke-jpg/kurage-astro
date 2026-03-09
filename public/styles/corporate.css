@@ -23,9 +23,9 @@
   --shadow-md: 0 4px 16px rgba(0,0,0,.08);
   --shadow-lg: 0 8px 30px rgba(0,0,0,.1);
   --shadow-hover: 0 12px 40px rgba(0,0,0,.12);
-  --sans: 'Noto Sans JP', sans-serif;
-  --serif: 'Noto Serif JP', serif;
-  --title: 'Cormorant Garamond', serif;
+  --sans: 'Zen Kaku Gothic New', sans-serif;
+  --serif: 'Shippori Mincho', serif;
+  --title: 'EB Garamond', serif;
 }
 
 /* ── RESET ── */
