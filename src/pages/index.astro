@@ -36,7 +36,7 @@ const seriesData = allSeries.map(s => {
 // 新着記事: 日付順
 const newArticles = [...allArticles]
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 3);
+  .slice(0, 9);
 
 // カテゴリ別記事数
 const categoryCounts: Record<string, number> = {};
@@ -48,7 +48,7 @@ for (const a of allArticles) {
 const ranked = allArticles
   .filter(a => a.data.rankingOrder != null)
   .sort((a, b) => a.data.rankingOrder! - b.data.rankingOrder!)
-  .slice(0, 3);
+  .slice(0, 10);
 
 // スタッフ
 const staff = (await getCollection('staff'))
