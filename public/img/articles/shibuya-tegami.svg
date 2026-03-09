@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#1a0a0a"/>
+      <stop offset="40%" stop-color="#2d1a12"/>
+      <stop offset="100%" stop-color="#1a1210"/>
+    </linearGradient>
+    <radialGradient id="glow2" cx="50%" cy="60%">
+      <stop offset="0%" stop-color="#c75b39" stop-opacity=".15"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <linearGradient id="neon1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff6b4a" stop-opacity=".8"/>
+      <stop offset="100%" stop-color="#c75b39" stop-opacity=".3"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="750" fill="url(#bg2)"/>
+  <rect width="1200" height="750" fill="url(#glow2)"/>
+  <!-- City grid lines (crosswalk) -->
+  <line x1="0" y1="550" x2="1200" y2="550" stroke="#fff" stroke-width="2" opacity=".06"/>
+  <rect x="200" y="560" width="60" height="8" fill="#fff" opacity=".04"/>
+  <rect x="300" y="560" width="60" height="8" fill="#fff" opacity=".04"/>
+  <rect x="400" y="560" width="60" height="8" fill="#fff" opacity=".04"/>
+  <rect x="500" y="560" width="60" height="8" fill="#fff" opacity=".04"/>
+  <rect x="600" y="560" width="60" height="8" fill="#fff" opacity=".04"/>
+  <rect x="700" y="560" width="60" height="8" fill="#fff" opacity=".04"/>
+  <rect x="800" y="560" width="60" height="8" fill="#fff" opacity=".04"/>
+  <rect x="900" y="560" width="60" height="8" fill="#fff" opacity=".04"/>
+  <!-- Buildings silhouette -->
+  <rect x="50" y="200" width="80" height="400" fill="#1a1210" opacity=".8"/>
+  <rect x="50" y="200" width="80" height="400" fill="#c75b39" opacity=".02"/>
+  <rect x="160" y="280" width="60" height="320" fill="#1a1210" opacity=".7"/>
+  <rect x="1000" y="180" width="90" height="420" fill="#1a1210" opacity=".8"/>
+  <rect x="1100" y="250" width="70" height="350" fill="#1a1210" opacity=".7"/>
+  <!-- Building windows (warm light) -->
+  <rect x="65" y="230" width="12" height="14" fill="#c75b39" opacity=".15"/>
+  <rect x="95" y="230" width="12" height="14" fill="#8b6b6b" opacity=".1"/>
+  <rect x="65" y="270" width="12" height="14" fill="#c75b39" opacity=".1"/>
+  <rect x="95" y="310" width="12" height="14" fill="#c75b39" opacity=".12"/>
+  <rect x="1020" y="220" width="12" height="14" fill="#c75b39" opacity=".15"/>
+  <rect x="1050" y="260" width="12" height="14" fill="#8b6b6b" opacity=".1"/>
+  <rect x="1020" y="300" width="12" height="14" fill="#c75b39" opacity=".1"/>
+  <!-- Neon sign glow -->
+  <rect x="170" y="310" width="40" height="12" rx="2" fill="url(#neon1)" opacity=".4"/>
+  <rect x="1010" y="270" width="50" height="10" rx="2" fill="#6b6b8a" opacity=".2"/>
+  <!-- Signal light -->
+  <circle cx="600" cy="160" r="8" fill="#c75b39" opacity=".6"/>
+  <circle cx="600" cy="160" r="20" fill="#c75b39" opacity=".08"/>
+  <!-- Text -->
+  <text x="600" y="340" font-family="serif" font-size="22" fill="#8b6b6b" opacity=".8" text-anchor="middle" letter-spacing=".15em">FICTION</text>
+  <text x="600" y="410" font-family="serif" font-size="46" fill="#e8dcc8" text-anchor="middle" font-weight="700">渋谷の交差点で、</text>
+  <text x="600" y="470" font-family="serif" font-size="36" fill="#c8b098" text-anchor="middle">誰にも届かない手紙を書いた夜</text>
+  <text x="600" y="650" font-family="sans-serif" font-size="16" fill="#8b6b6b" text-anchor="middle" letter-spacing=".1em">山田 花子</text>
+</svg>

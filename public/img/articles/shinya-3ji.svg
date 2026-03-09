@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0e27"/>
+      <stop offset="50%" stop-color="#1a1a3e"/>
+      <stop offset="100%" stop-color="#0d1b2a"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="70%" cy="30%">
+      <stop offset="0%" stop-color="#4a7c8a" stop-opacity=".3"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <radialGradient id="moon" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#e8dcc8"/>
+      <stop offset="80%" stop-color="#c8b89a"/>
+      <stop offset="100%" stop-color="#a89878" stop-opacity=".5"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="750" fill="url(#bg1)"/>
+  <rect width="1200" height="750" fill="url(#glow1)"/>
+  <!-- Stars -->
+  <circle cx="150" cy="120" r="1.5" fill="#fff" opacity=".6"/>
+  <circle cx="320" cy="80" r="1" fill="#fff" opacity=".4"/>
+  <circle cx="480" cy="200" r="1.5" fill="#fff" opacity=".5"/>
+  <circle cx="700" cy="60" r="2" fill="#fff" opacity=".7"/>
+  <circle cx="850" cy="180" r="1" fill="#fff" opacity=".3"/>
+  <circle cx="1050" cy="100" r="1.5" fill="#fff" opacity=".5"/>
+  <circle cx="200" cy="300" r="1" fill="#fff" opacity=".3"/>
+  <circle cx="950" cy="280" r="1.5" fill="#fff" opacity=".4"/>
+  <circle cx="600" cy="150" r="1" fill="#fff" opacity=".6"/>
+  <circle cx="400" cy="350" r="1" fill="#fff" opacity=".2"/>
+  <!-- Moon -->
+  <circle cx="900" cy="180" r="60" fill="url(#moon)" opacity=".8"/>
+  <circle cx="920" cy="170" r="55" fill="url(#bg1)" opacity=".7"/>
+  <!-- Window frame -->
+  <rect x="100" y="350" width="400" height="350" rx="4" fill="none" stroke="#4a7c8a" stroke-width="1.5" opacity=".3"/>
+  <line x1="300" y1="350" x2="300" y2="700" stroke="#4a7c8a" stroke-width="1" opacity=".2"/>
+  <line x1="100" y1="525" x2="500" y2="525" stroke="#4a7c8a" stroke-width="1" opacity=".2"/>
+  <!-- Warm light from window -->
+  <rect x="105" y="355" width="190" height="168" fill="#2a2040" opacity=".5"/>
+  <rect x="105" y="355" width="190" height="168" fill="#c75b39" opacity=".05"/>
+  <!-- Scattered paper -->
+  <rect x="650" y="480" width="80" height="110" rx="2" fill="#e8e4de" opacity=".08" transform="rotate(-15 690 535)"/>
+  <rect x="720" y="500" width="80" height="110" rx="2" fill="#e8e4de" opacity=".06" transform="rotate(8 760 555)"/>
+  <!-- Text -->
+  <text x="600" y="420" font-family="serif" font-size="22" fill="#4a7c8a" opacity=".7" text-anchor="middle" letter-spacing=".15em">ESSAY</text>
+  <text x="600" y="480" font-family="serif" font-size="52" fill="#e8dcc8" text-anchor="middle" font-weight="700">深夜3時、</text>
+  <text x="600" y="545" font-family="serif" font-size="38" fill="#c8b8a0" text-anchor="middle">眠れない夜に書いた手紙を、</text>
+  <text x="600" y="600" font-family="serif" font-size="38" fill="#c8b8a0" text-anchor="middle">朝になって破いた</text>
+  <text x="600" y="670" font-family="sans-serif" font-size="16" fill="#6b6b8a" text-anchor="middle" letter-spacing=".1em">田中 美咲</text>
+</svg>

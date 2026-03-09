@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1228"/>
+      <stop offset="50%" stop-color="#221832"/>
+      <stop offset="100%" stop-color="#18102a"/>
+    </linearGradient>
+    <radialGradient id="glow3" cx="30%" cy="50%">
+      <stop offset="0%" stop-color="#6b6b8a" stop-opacity=".2"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="750" fill="url(#bg3)"/>
+  <rect width="1200" height="750" fill="url(#glow3)"/>
+  <!-- Abstract geometric shapes -->
+  <rect x="80" y="100" width="300" height="300" fill="none" stroke="#6b6b8a" stroke-width="1" opacity=".12" transform="rotate(15 230 250)"/>
+  <rect x="120" y="140" width="220" height="220" fill="none" stroke="#6b6b8a" stroke-width="1" opacity=".08" transform="rotate(30 230 250)"/>
+  <circle cx="950" cy="200" r="120" fill="none" stroke="#8b6b6b" stroke-width="1" opacity=".1"/>
+  <circle cx="950" cy="200" r="80" fill="none" stroke="#8b6b6b" stroke-width="1" opacity=".08"/>
+  <circle cx="950" cy="200" r="40" fill="#8b6b6b" opacity=".04"/>
+  <!-- Broken line (representing "letting go") -->
+  <path d="M100 600 Q300 580 400 620 Q500 660 600 600" fill="none" stroke="#6b6b8a" stroke-width="1.5" opacity=".15" stroke-dasharray="8 6"/>
+  <path d="M600 600 Q700 540 800 580 Q900 620 1100 560" fill="none" stroke="#c75b39" stroke-width="1.5" opacity=".12" stroke-dasharray="8 6"/>
+  <!-- Floating particles -->
+  <circle cx="300" cy="450" r="3" fill="#6b6b8a" opacity=".15"/>
+  <circle cx="500" cy="350" r="2" fill="#8b6b6b" opacity=".12"/>
+  <circle cx="800" cy="400" r="3" fill="#6b6b8a" opacity=".1"/>
+  <circle cx="400" cy="500" r="2" fill="#c75b39" opacity=".1"/>
+  <circle cx="900" cy="500" r="2" fill="#6b6b8a" opacity=".08"/>
+  <!-- Text -->
+  <text x="600" y="300" font-family="serif" font-size="22" fill="#6b6b8a" opacity=".8" text-anchor="middle" letter-spacing=".15em">COLUMN</text>
+  <text x="600" y="380" font-family="serif" font-size="50" fill="#e8dcc8" text-anchor="middle" font-weight="700">「正しさ」を手放した瞬間、</text>
+  <text x="600" y="450" font-family="serif" font-size="42" fill="#c8b8a8" text-anchor="middle">文章は呼吸を始める</text>
+  <text x="600" y="550" font-family="sans-serif" font-size="16" fill="#6b6b8a" text-anchor="middle" letter-spacing=".1em">鈴木 太郎</text>
+</svg>
