@@ -2,8 +2,19 @@
 interface Props {
   title: string;
   description?: string;
+  image?: string;
+  ogType?: 'website' | 'article';
 }
-const { title, description = 'KURAGEは、人間が書いた文章だけを届けるウェブマガジンです。' } = Astro.props;
+const {
+  title,
+  description = 'KURAGEは、人間が書いた文章だけを届けるウェブマガジンです。',
+  image = '/img/kurage-icon.png',
+  ogType = 'website',
+} = Astro.props;
+
+const siteUrl = 'https://kurage-astro.vercel.app';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const ogImageUrl = image.startsWith('http') ? image : new URL(image, siteUrl).href;
 ---
 <!DOCTYPE html>
 <html lang="ja">
@@ -12,6 +23,20 @@ const { title, description = 'KURAGEは、人間が書いた文章だけを届�
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title}</title>
   <meta name="description" content={description}>
+  <link rel="canonical" href={canonicalUrl}>
+  <!-- OGP -->
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content={ogImageUrl}>
+  <meta property="og:url" content={canonicalUrl}>
+  <meta property="og:type" content={ogType}>
+  <meta property="og:site_name" content="KURAGE by 海月舎">
+  <meta property="og:locale" content="ja_JP">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={ogImageUrl}>
   <link rel="icon" type="image/png" href="/img/kurage-icon.png">
   <link rel="apple-touch-icon" href="/img/kurage-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">

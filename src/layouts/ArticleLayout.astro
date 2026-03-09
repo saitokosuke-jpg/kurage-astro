@@ -13,7 +13,12 @@ const { article } = Astro.props;
 const cat = CATEGORIES[article.data.category];
 const dateStr = article.data.date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
-<BaseLayout title={`${article.data.title} | KURAGE by 海月舎`} description={article.data.excerpt}>
+<BaseLayout
+  title={`${article.data.title} | KURAGE by 海月舎`}
+  description={article.data.excerpt}
+  image={article.data.coverImage || '/img/kurage-icon.png'}
+  ogType="article"
+>
   <Header />
   <MobileMenu />
 
