@@ -14,8 +14,10 @@ export default defineConfig({
     markdoc(),
     keystatic(),
   ],
-  server: {
-    allowedHosts: ['kurage-astro.vercel.app'],
+  security: {
+    allowedDomains: [
+      { hostname: 'kurage-astro.vercel.app', protocol: 'https' },
+    ],
   },
   build: {
     format: 'directory',
