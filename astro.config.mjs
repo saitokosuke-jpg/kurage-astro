@@ -6,6 +6,7 @@ import keystatic from '@keystatic/astro';
 import vercel from '@astrojs/vercel';
 
 export default defineConfig({
+  site: 'https://kurage-astro.vercel.app',
   output: 'static',
   adapter: vercel(),
   integrations: [
