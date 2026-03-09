@@ -2,10 +2,16 @@
 import type { CollectionEntry } from 'astro:content';
 import { CATEGORIES } from '../lib/categories';
 
-interface Props {
-  articles: CollectionEntry<'articles'>[];
+interface SeriesSlide {
+  series: CollectionEntry<'series'>;
+  publishedEpisodes: number;
+  latestEpisodeTitle?: string;
 }
-const { articles } = Astro.props;
+
+interface Props {
+  seriesSlides: SeriesSlide[];
+}
+const { seriesSlides } = Astro.props;
 ---
 <section class="z z--hero" id="hero">
   <div class="kj-icon kj-icon--1" aria-hidden="true"><img src="/img/kurage-icon.png" alt=""></div>
@@ -19,30 +25,45 @@ const { articles } = Astro.props;
 
   <div class="hero-carousel">
     <div class="hero-carousel__track">
-      {articles.map((article, i) => {
-        const cat = CATEGORIES[article.data.category];
+      {seriesSlides.map((item, i) => {
+        const cat = CATEGORIES[item.series.data.category];
+        const progress = Math.round((item.publishedEpisodes / item.series.data.totalEpisodes) * 100);
         return (
-          <a href={`/articles/${article.slug}`} class={`hero-slide ${i === 0 ? 'is-active' : ''}`}>
+          <a href="/magazine" class={`hero-slide ${i === 0 ? 'is-active' : ''}`}>
             <div class="hero-slide__img">
-              {article.data.coverImage ? (
-                <img src={article.data.coverImage} alt={article.data.title} style="width:100%;height:100%;object-fit:cover;">
+              {item.series.data.coverImage ? (
+                <img src={item.series.data.coverImage} alt={item.series.data.title} style="width:100%;height:100%;object-fit:cover;">
               ) : (
                 <div class="hero-slide__placeholder"><img src="/img/kurage-icon.png" alt="" class="hero-slide__deco"></div>
               )}
             </div>
             <div class="hero-slide__overlay">
-              <span class="hero-slide__cat">{cat.ja}</span>
-              <h2 class="hero-slide__title">{article.data.title}</h2>
-              <p class="hero-slide__meta">{article.data.author} ・ {article.data.readingMinutes}分</p>
+              <div class="hero-slide__badge-row">
+                <span class="hero-slide__cat">{cat.ja}連載</span>
+                <span class="hero-slide__ep">第{item.publishedEpisodes}話 / 全{item.series.data.totalEpisodes}話</span>
+              </div>
+              <h2 class="hero-slide__title">{item.series.data.title}</h2>
+              {item.series.data.description && (
+                <p class="hero-slide__desc">{item.series.data.description}</p>
+              )}
+              <div class="hero-slide__bottom">
+                <span class="hero-slide__author">{item.series.data.author}</span>
+                <div class="hero-slide__progress">
+                  <div class="hero-slide__progress-bar">
+                    <div class="hero-slide__progress-fill" style={`width:${progress}%;background:${cat.color}`}></div>
+                  </div>
+                  <span class="hero-slide__progress-text">{progress}%</span>
+                </div>
+              </div>
             </div>
           </a>
         );
       })}
     </div>
-    <button class="hero-carousel__prev" aria-label="前へ">&larr;</button>
-    <button class="hero-carousel__next" aria-label="次へ">&rarr;</button>
+    <button class="hero-carousel__prev" aria-label="前へ">&#8592;</button>
+    <button class="hero-carousel__next" aria-label="次へ">&#8594;</button>
     <div class="hero-carousel__dots">
-      {articles.map((_, i) => (
+      {seriesSlides.map((_, i) => (
         <span class={`hero-carousel__dot ${i === 0 ? 'is-active' : ''}`}></span>
       ))}
     </div>

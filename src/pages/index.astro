@@ -9,7 +9,6 @@ import SectionHead from '../components/SectionHead.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import CategoryCard from '../components/CategoryCard.astro';
 import RankItem from '../components/RankItem.astro';
-import SeriesCard from '../components/SeriesCard.astro';
 import StaffCard from '../components/StaffCard.astro';
 import AboutSection from '../components/AboutSection.astro';
 import CallSection from '../components/CallSection.astro';
@@ -22,11 +21,17 @@ import { CATEGORIES, type CategoryKey } from '../lib/categories';
 const allArticles = (await getCollection('articles'))
   .filter(a => !a.data.draft);
 
-// カルーセル用: featured記事
-const featured = allArticles
-  .filter(a => a.data.featured)
-  .sort((a, b) => (a.data.featuredOrder ?? 99) - (b.data.featuredOrder ?? 99))
-  .slice(0, 3);
+// 連載データ（ヒーローカルーセル用）
+const allSeries = await getCollection('series');
+const seriesData = allSeries.map(s => {
+  const episodes = allArticles.filter(a => a.data.series === s.slug);
+  const latestEp = episodes.sort((a, b) => (b.data.episodeNumber ?? 0) - (a.data.episodeNumber ?? 0))[0];
+  return {
+    series: s,
+    publishedEpisodes: episodes.length,
+    latestEpisodeTitle: latestEp?.data.title,
+  };
+});
 
 // 新着記事: 日付順
 const newArticles = [...allArticles]
@@ -45,18 +50,6 @@ const ranked = allArticles
   .sort((a, b) => a.data.rankingOrder! - b.data.rankingOrder!)
   .slice(0, 3);
 
-// 連載
-const allSeries = await getCollection('series');
-const seriesData = allSeries.map(s => {
-  const episodes = allArticles.filter(a => a.data.series === s.slug);
-  const latestEp = episodes.sort((a, b) => (b.data.episodeNumber ?? 0) - (a.data.episodeNumber ?? 0))[0];
-  return {
-    series: s,
-    publishedEpisodes: episodes.length,
-    latestEpisodeTitle: latestEp?.data.title,
-  };
-});
-
 // スタッフ
 const staff = (await getCollection('staff'))
   .sort((a, b) => a.data.order - b.data.order);
@@ -65,8 +58,8 @@ const staff = (await getCollection('staff'))
   <Header />
   <MobileMenu />
 
-  <!-- Hero -->
-  <HeroCarousel articles={featured} />
+  <!-- Hero — 連載カルーセル -->
+  <HeroCarousel seriesSlides={seriesData} />
 
   <KurageIndex />
 
@@ -99,17 +92,6 @@ const staff = (await getCollection('staff'))
     <SectionHead label="Monthly Ranking" title="今月の人気記事" moreHref="/magazine" />
     <div class="rank-list">
       {ranked.map((a, i) => <RankItem article={a} rank={i + 1} />)}
-    </div>
-  </section>
-
-  <!-- 連載 -->
-  <section class="z z--series" id="series">
-    <div class="kj-icon kj-icon--4" aria-hidden="true"><img src="/img/kurage-icon.png" alt=""></div>
-    <SectionHead label="Featured Series" title="注目の連載" moreHref="/magazine" />
-    <div class="series-grid">
-      {seriesData.map(d => (
-        <SeriesCard series={d.series} publishedEpisodes={d.publishedEpisodes} latestEpisodeTitle={d.latestEpisodeTitle} />
-      ))}
     </div>
   </section>
 
