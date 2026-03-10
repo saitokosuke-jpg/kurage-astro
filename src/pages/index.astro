@@ -11,8 +11,6 @@ import CategoryCard from '../components/CategoryCard.astro';
 import RankItem from '../components/RankItem.astro';
 import StaffCard from '../components/StaffCard.astro';
 import AboutSection from '../components/AboutSection.astro';
-import CallSection from '../components/CallSection.astro';
-import ContactSection from '../components/ContactSection.astro';
 
 import { getCollection } from 'astro:content';
 import { CATEGORIES, type CategoryKey } from '../lib/categories';
@@ -102,9 +100,6 @@ const staff = (await getCollection('staff'))
 
   <KurageIndex />
 
-  <!-- Call -->
-  <CallSection />
-
   <!-- Vessels (Staff) -->
   <section class="z z--vessels" id="vessels">
     <SectionHead label="STAFF" title="スタッフ一覧" />
@@ -114,9 +109,6 @@ const staff = (await getCollection('staff'))
   </section>
 
   <KurageIndex />
-
-  <!-- Signal (Contact) -->
-  <ContactSection />
 
   <Footer />
 </BaseLayout>
