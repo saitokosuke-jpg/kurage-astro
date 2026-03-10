@@ -6,15 +6,15 @@
    — 明朝体が暗闇に浮かぶ
    ============================================ */
 
-/* ── DEEP SEA PALETTE ── */
+/* ── DEEP SEA PALETTE — 水面→深海 ── */
 :root {
-  /* 深海のグラデーション — 浅い→深い */
-  --sea-0: #0c1220;      /* 最も深い闇 */
-  --sea-1: #0e1528;       /* 深海 */
-  --sea-2: #101830;       /* 中層 */
-  --sea-3: #121b38;       /* やや浅い */
-  --sea-4: #141e40;       /* 浅い層 */
-  --sea-surface: #0a1628; /* 水面直下 */
+  /* 深度グラデーション — 水面(水色) → 深海(濃紺) スクロールで深くなる */
+  --sea-0: #031a30;       /* 最深部: 深淵 */
+  --sea-1: #052540;       /* 深海 */
+  --sea-2: #083558;       /* 中深層 */
+  --sea-3: #0c4a78;       /* 中層 */
+  --sea-4: #106098;       /* 浅い層 */
+  --sea-surface: #2098d0; /* 水面直下: 明るい水色 */
 
   /* 生物発光カラー */
   --glow-cyan: #00d4ff;
@@ -99,10 +99,17 @@ a { color: inherit; text-decoration: none; }
   50% { opacity: .8; }
 }
 @keyframes drift {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  33% { transform: translate(10px, -8px) rotate(2deg); }
-  66% { transform: translate(-6px, 4px) rotate(-1deg); }
-  100% { transform: translate(0, 0) rotate(0deg); }
+  0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  25% { transform: translate(12px, -15px) rotate(3deg) scale(1.02); }
+  50% { transform: translate(-4px, -8px) rotate(-2deg) scale(0.98); }
+  75% { transform: translate(-10px, 5px) rotate(1deg) scale(1.01); }
+  100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+}
+/* クラゲの泳ぎ — ふわふわ上下に浮遊 */
+@keyframes swim {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  30% { transform: translateY(-20px) scaleY(0.95); }
+  60% { transform: translateY(-8px) scaleY(1.03); }
 }
 @keyframes shimmer {
   0% { background-position: -200% center; }
@@ -155,7 +162,7 @@ a.glow-link:hover::after { transform: scaleX(1); }
 }
 .hd.is-visible {
   transform: translateY(0);
-  background: rgba(12,18,32,.88);
+  background: rgba(10,40,80,.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255,255,255,.06);
@@ -234,34 +241,61 @@ a.glow-link:hover::after { transform: scaleX(1); }
   pointer-events: none;
   user-select: none;
   z-index: 1;
-  opacity: .25;
-  filter: drop-shadow(0 0 20px rgba(0,212,255,.3));
   animation: drift 12s ease-in-out infinite;
 }
+/* 浅い層: 透き通ったクラゲ（低opacity、影なし） */
+.kj-icon--shallow {
+  opacity: .12;
+  filter: none;
+}
+/* 中層: やや光り始める */
+.kj-icon--mid {
+  opacity: .2;
+  filter: drop-shadow(0 0 10px rgba(0,212,255,.15));
+}
+/* 深層: はっきり発光 */
+.kj-icon--deep {
+  opacity: .3;
+  filter: drop-shadow(0 0 25px rgba(0,212,255,.4));
+}
+/* 最深部: 強く発光 */
+.kj-icon--abyss {
+  opacity: .4;
+  filter: drop-shadow(0 0 35px rgba(0,212,255,.5)) drop-shadow(0 0 60px rgba(123,104,238,.2));
+}
+/* 各アイコンのアニメーション差 */
+.kj-icon--1 { animation-delay: 0s; }
 .kj-icon--2 { animation-delay: -3s; animation-duration: 15s; }
 .kj-icon--3 { animation-delay: -6s; animation-duration: 18s; }
-.kj-icon--5 { animation-delay: -2s; animation-duration: 14s; }
+.kj-icon--4 { animation-delay: -1.5s; animation-duration: 14s; }
+.kj-icon--5 { animation-delay: -2s; animation-duration: 16s; }
+.kj-icon--6 { animation-delay: -4s; animation-duration: 13s; }
+.kj-icon--7 { animation-delay: -7s; animation-duration: 17s; }
 .kj-icon img {
   width: 100%; height: 100%;
   object-fit: contain;
 }
-.kj-icon--1 { width: 220px; height: 220px; top: 2%; right: -20px; transform: rotate(-15deg); }
-.kj-icon--2 { width: 200px; height: 200px; bottom: -40px; right: -20px; transform: rotate(10deg); }
-.kj-icon--3 { width: 230px; height: 230px; bottom: -30px; right: -40px; transform: rotate(-8deg); }
-.kj-icon--4 { width: 180px; height: 180px; bottom: -20px; right: -30px; transform: rotate(20deg); }
-.kj-icon--5 { width: 220px; height: 220px; top: 5%; right: -40px; transform: rotate(-12deg); }
-.kj-icon--6 { width: 190px; height: 190px; bottom: -30px; left: -30px; transform: rotate(5deg); }
-.kj-icon--7 { width: 240px; height: 240px; bottom: -20px; right: -30px; transform: rotate(-20deg); }
+/* 位置 — 左右交互に配置して奥行きを演出 */
+.kj-icon--1 { width: 180px; height: 180px; top: 8%; right: -15px; }
+.kj-icon--2 { width: 160px; height: 160px; bottom: -30px; left: -20px; }
+.kj-icon--3 { width: 200px; height: 200px; top: 15%; right: -30px; }
+.kj-icon--4 { width: 140px; height: 140px; top: 5%; left: -20px; }
+.kj-icon--5 { width: 170px; height: 170px; bottom: -20px; right: -25px; }
+.kj-icon--6 { width: 190px; height: 190px; top: 10%; left: -25px; }
+.kj-icon--7 { width: 220px; height: 220px; bottom: -15px; right: -20px; }
 
 @media (max-width: 768px) {
-  .kj-icon { opacity: .18; }
-  .kj-icon--1 { width: 120px; height: 120px; top: 5%; right: -15px; }
-  .kj-icon--2 { width: 100px; height: 100px; bottom: -15px; right: -10px; }
-  .kj-icon--3 { width: 110px; height: 110px; bottom: -15px; right: -15px; }
-  .kj-icon--4 { width: 90px; height: 90px; bottom: -10px; right: -15px; }
-  .kj-icon--5 { width: 100px; height: 100px; top: 3%; right: -20px; }
-  .kj-icon--6 { display: none; }
-  .kj-icon--7 { width: 100px; height: 100px; bottom: -10px; right: -15px; }
+  .kj-icon--shallow { opacity: .08; }
+  .kj-icon--mid { opacity: .12; }
+  .kj-icon--deep { opacity: .18; }
+  .kj-icon--abyss { opacity: .25; }
+  .kj-icon--1 { width: 100px; height: 100px; top: 5%; right: -10px; }
+  .kj-icon--2 { width: 80px; height: 80px; bottom: -10px; left: -10px; }
+  .kj-icon--3 { width: 90px; height: 90px; top: 10%; right: -15px; }
+  .kj-icon--4 { width: 70px; height: 70px; top: 3%; left: -10px; }
+  .kj-icon--5 { width: 80px; height: 80px; bottom: -10px; right: -15px; }
+  .kj-icon--6 { width: 90px; height: 90px; top: 8%; left: -10px; }
+  .kj-icon--7 { width: 100px; height: 100px; bottom: -10px; right: -10px; }
 }
 
 
@@ -273,7 +307,7 @@ a.glow-link:hover::after { transform: scaleX(1); }
   padding: 36px 0;
   text-align: center;
   overflow: hidden;
-  background: var(--sea-0);
+  background: transparent;
 }
 .kurage-index::before {
   content: '⬦';
@@ -427,10 +461,10 @@ a.glow-link:hover::after { transform: scaleX(1); }
   align-items: center;
   overflow: hidden;
   background:
-    radial-gradient(ellipse 100% 60% at 50% 0%, rgba(0,212,255,.08) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 80% at 15% 30%, rgba(123,104,238,.06) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 50% at 85% 60%, rgba(0,212,255,.04) 0%, transparent 50%),
-    var(--sea-surface);
+    radial-gradient(ellipse 100% 80% at 50% 0%, rgba(255,255,255,.12) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 60% at 30% 20%, rgba(100,200,255,.1) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 60% at 70% 80%, rgba(0,150,255,.06) 0%, transparent 50%),
+    linear-gradient(to bottom, var(--sea-surface) 0%, var(--sea-4) 100%);
 }
 /* 光の揺らぎ（水面のカウスティクス風） */
 .z--hero::before {
@@ -439,7 +473,7 @@ a.glow-link:hover::after { transform: scaleX(1); }
   top: 0; left: 0; right: 0;
   height: 200px;
   background:
-    radial-gradient(ellipse 30% 50% at 20% 0%, rgba(0,212,255,.06) 0%, transparent 100%),
+    radial-gradient(ellipse 30% 50% at 20% 0%, rgba(100,200,255,.12) 0%, transparent 100%),
     radial-gradient(ellipse 25% 40% at 60% 0%, rgba(123,104,238,.05) 0%, transparent 100%),
     radial-gradient(ellipse 20% 30% at 80% 0%, rgba(0,212,255,.04) 0%, transparent 100%);
   pointer-events: none;
@@ -675,9 +709,9 @@ a.glow-link:hover::after { transform: scaleX(1); }
 .z--new {
   padding: 80px 0;
   background:
-    radial-gradient(ellipse 80% 50% at 20% 80%, rgba(0,212,255,.04) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(123,104,238,.03) 0%, transparent 50%),
-    var(--sea-1);
+    radial-gradient(ellipse 80% 50% at 20% 80%, rgba(100,200,255,.06) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(0,150,255,.04) 0%, transparent 50%),
+    linear-gradient(to bottom, var(--sea-4) 0%, var(--sea-3) 100%);
 }
 .new-grid {
   display: grid;
@@ -695,9 +729,9 @@ a.glow-link:hover::after { transform: scaleX(1); }
 .z--categories {
   padding: 80px 0;
   background:
-    radial-gradient(ellipse 50% 80% at 0% 50%, rgba(0,200,224,.08) 0%, transparent 55%),
-    radial-gradient(ellipse 60% 60% at 100% 20%, rgba(123,104,238,.06) 0%, transparent 50%),
-    var(--sea-2);
+    radial-gradient(ellipse 50% 80% at 0% 50%, rgba(0,180,255,.06) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 60% at 100% 20%, rgba(80,120,200,.05) 0%, transparent 50%),
+    linear-gradient(to bottom, var(--sea-3) 0%, var(--sea-2) 100%);
   color: var(--text);
 }
 /* グロウライン — アニメーション */
@@ -785,8 +819,8 @@ a.glow-link:hover::after { transform: scaleX(1); }
 .z--ranking {
   padding: 80px 0;
   background:
-    radial-gradient(ellipse 70% 50% at 80% 70%, rgba(192,132,252,.05) 0%, transparent 50%),
-    var(--sea-3);
+    radial-gradient(ellipse 70% 50% at 80% 70%, rgba(123,104,238,.06) 0%, transparent 50%),
+    linear-gradient(to bottom, var(--sea-2) 0%, var(--sea-1) 100%);
 }
 /* グロウライン — パープル */
 .z--ranking::before {
@@ -955,8 +989,8 @@ a.glow-link:hover::after { transform: scaleX(1); }
 .z--about {
   padding: 80px 0;
   background:
-    radial-gradient(ellipse 60% 60% at 30% 50%, rgba(52,211,153,.04) 0%, transparent 50%),
-    var(--sea-4);
+    radial-gradient(ellipse 60% 60% at 30% 50%, rgba(0,212,255,.04) 0%, transparent 50%),
+    linear-gradient(to bottom, var(--sea-1) 0%, var(--sea-0) 100%);
 }
 .z--about::before {
   content: '';
@@ -1091,8 +1125,8 @@ a.glow-link:hover::after { transform: scaleX(1); }
 .z--vessels {
   padding: 80px 0;
   background:
-    radial-gradient(ellipse 50% 60% at 70% 50%, rgba(123,104,238,.04) 0%, transparent 50%),
-    var(--sea-2);
+    radial-gradient(ellipse 50% 60% at 70% 50%, rgba(123,104,238,.06) 0%, transparent 50%),
+    var(--sea-0);
 }
 .z--vessels::before {
   content: '';
