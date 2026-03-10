@@ -1,0 +1,84 @@
+---
+import { getCollection } from 'astro:content';
+import { CATEGORIES } from '../../lib/categories';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import MobileMenu from '../../components/MobileMenu.astro';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const allSeries = await getCollection('series');
+  const allArticles = (await getCollection('articles')).filter(a => !a.data.draft);
+
+  return allSeries.map(s => {
+    const episodes = allArticles
+      .filter(a => a.data.series === s.slug)
+      .sort((a, b) => (a.data.episodeNumber ?? 0) - (b.data.episodeNumber ?? 0));
+    return {
+      params: { slug: s.slug },
+      props: { series: s, episodes },
+    };
+  });
+}
+
+const { series, episodes } = Astro.props;
+const cat = CATEGORIES[series.data.category];
+const progress = Math.round((episodes.length / series.data.totalEpisodes) * 100);
+---
+<BaseLayout
+  title={`${series.data.title} | KURAGE by 海月舎`}
+  description={series.data.description || `${series.data.author}による${cat.ja}連載`}
+>
+  <Header />
+  <MobileMenu />
+
+  <div class="sr">
+    <div class="sr__hero">
+      <div class="sr__hero-in">
+        <span class="sr__cat" style={`color:${cat.color};border:1px solid rgba(${cat.colorRgb},.3)`}>{cat.ja}連載</span>
+        <h1 class="sr__title">{series.data.title}</h1>
+        <p class="sr__author">{series.data.author}</p>
+        {series.data.description && (
+          <p class="sr__desc">{series.data.description}</p>
+        )}
+        <div class="sr__progress">
+          <div class="sr__progress-info">
+            <span>全{series.data.totalEpisodes}話</span>
+            <span>{progress}% 公開中</span>
+          </div>
+          <div class="sr__progress-bar">
+            <div class="sr__progress-fill" style={`width:${progress}%;background:${cat.color}`}></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sr__list">
+      <div class="sr__list-in">
+        {episodes.map((ep, i) => {
+          const dateStr = ep.data.date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+          return (
+            <a href={`/articles/${ep.slug}`} class="ep-card">
+              <div class="ep-card__num">
+                <span class="ep-card__num-label">第</span>
+                <span class="ep-card__num-value">{ep.data.episodeNumber}</span>
+                <span class="ep-card__num-label">話</span>
+              </div>
+              <div class="ep-card__body">
+                <h2 class="ep-card__title">{ep.data.title}</h2>
+                <p class="ep-card__excerpt">{ep.data.excerpt}</p>
+                <div class="ep-card__meta">
+                  <span>{dateStr}</span>
+                  <span>約{ep.data.readingMinutes}分</span>
+                </div>
+              </div>
+              <div class="ep-card__arrow">→</div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>

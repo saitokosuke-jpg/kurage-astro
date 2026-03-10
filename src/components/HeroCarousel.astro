@@ -28,7 +28,7 @@ const { seriesSlides } = Astro.props;
         const cat = CATEGORIES[item.series.data.category];
         const progress = Math.round((item.publishedEpisodes / item.series.data.totalEpisodes) * 100);
         return (
-          <a href="/magazine" class={`hero-slide ${i === 0 ? 'is-active' : ''}`}>
+          <a href={`/series/${item.series.slug}`} class={`hero-slide ${i === 0 ? 'is-active' : ''}`}>
             <div class="hero-slide__img">
               {item.series.data.coverImage ? (
                 <img src={item.series.data.coverImage} alt={item.series.data.title} style="width:100%;height:100%;object-fit:cover;">

@@ -11,7 +11,7 @@ const { series, publishedEpisodes, latestEpisodeTitle } = Astro.props;
 const cat = CATEGORIES[series.data.category];
 const progress = Math.round((publishedEpisodes / series.data.totalEpisodes) * 100);
 ---
-<a href="/magazine" class="series-card">
+<a href={`/series/${series.slug}`} class="series-card">
   <div class="series-card__img"><div class="series-card__placeholder"></div></div>
   <div class="series-card__content">
     <div class="series-card__top">

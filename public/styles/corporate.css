@@ -356,6 +356,7 @@ a.glow-link:hover::after { transform: scaleX(1); }
   color: var(--glow-cyan);
   flex-shrink: 0;
   font-weight: 500;
+  text-shadow: 0 1px 6px rgba(0,30,60,.4);
 }
 .sec-head__title {
   font-family: var(--serif);
@@ -364,6 +365,7 @@ a.glow-link:hover::after { transform: scaleX(1); }
   flex: 1;
   letter-spacing: .02em;
   color: var(--text-bright);
+  text-shadow: 0 1px 8px rgba(0,30,60,.4);
 }
 .sec-head__more {
   font-size: 13px;
@@ -382,10 +384,12 @@ a.glow-link:hover::after { transform: scaleX(1); }
    ══════════════════════════════════ */
 .article-card {
   display: block;
-  background: var(--card);
-  border: 1px solid var(--card-border);
+  background: rgba(0,20,50,.55);
+  border: 1px solid rgba(255,255,255,.1);
   border-radius: var(--radius);
   overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   transition: border-color .3s, box-shadow .3s, transform .3s;
 }
 .article-card:hover {
@@ -510,18 +514,20 @@ a.glow-link:hover::after { transform: scaleX(1); }
 .hero-brand__sub {
   font-size: 16px;
   font-family: var(--serif);
-  color: var(--text);
+  color: #fff;
   letter-spacing: .22em;
   margin-bottom: 20px;
   font-weight: 500;
+  text-shadow: 0 1px 8px rgba(0,30,60,.4);
 }
 .hero-brand__desc {
   font-size: clamp(14px, 1.8vw, 18px);
-  color: var(--text-secondary);
+  color: rgba(255,255,255,.92);
   letter-spacing: .04em;
   font-family: var(--serif);
   font-weight: 500;
   line-height: 1.8;
+  text-shadow: 0 1px 8px rgba(0,30,60,.35);
 }
 
 /* Carousel */
@@ -758,10 +764,12 @@ a.glow-link:hover::after { transform: scaleX(1); }
   padding: 0 5%;
 }
 .cat-card {
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(0,20,50,.5);
+  border: 1px solid rgba(255,255,255,.1);
   border-radius: var(--radius);
   overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   transition: border-color .3s, box-shadow .3s, transform .3s;
 }
 .cat-card:hover {
@@ -843,10 +851,12 @@ a.glow-link:hover::after { transform: scaleX(1); }
   display: flex;
   align-items: center;
   gap: 24px;
-  background: var(--card);
-  border: 1px solid var(--card-border);
+  background: rgba(0,20,50,.5);
+  border: 1px solid rgba(255,255,255,.1);
   border-radius: var(--radius);
   padding: 20px 28px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   transition: border-color .3s, box-shadow .3s, transform .3s;
 }
 .rank-item:hover {
@@ -1625,4 +1635,181 @@ a.glow-link:hover::after { transform: scaleX(1); }
   .auth-box { margin: 0 6% 60px; padding: 22px 20px; gap: 14px; }
   .auth-box__av { width: 48px; height: 48px; }
   .pg-hero { padding: 100px 0 28px; }
+}
+
+
+/* ══════════════════════════════════
+   SERIES DETAIL PAGE — 連載詳細
+   ══════════════════════════════════ */
+
+.sr__hero {
+  background: linear-gradient(to bottom, var(--sea-surface) 0%, var(--sea-3) 100%);
+  padding: 130px 0 60px;
+}
+.sr__hero-in {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 6%;
+  text-align: center;
+}
+.sr__cat {
+  display: inline-block;
+  font-size: 13px;
+  padding: 5px 16px;
+  border-radius: 20px;
+  letter-spacing: .08em;
+  margin-bottom: 20px;
+}
+.sr__title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.4;
+  margin-bottom: 16px;
+}
+.sr__author {
+  font-size: 15px;
+  color: rgba(255,255,255,.7);
+  margin-bottom: 16px;
+}
+.sr__desc {
+  font-size: 15px;
+  color: rgba(255,255,255,.6);
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+.sr__progress {
+  max-width: 400px;
+  margin: 0 auto;
+}
+.sr__progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 8px;
+}
+.sr__progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.sr__progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width .6s ease;
+}
+
+/* Episode list */
+.sr__list {
+  background: linear-gradient(to bottom, var(--sea-3) 0%, var(--sea-0) 100%);
+  padding: 60px 0 80px;
+  min-height: 50vh;
+}
+.sr__list-in {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 6%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Episode card */
+.ep-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 28px;
+  background: rgba(255,255,255,.04);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  text-decoration: none;
+  color: inherit;
+  transition: background .25s ease, transform .25s ease;
+}
+.ep-card:first-child {
+  border-radius: 12px 12px 0 0;
+}
+.ep-card:last-child {
+  border-radius: 0 0 12px 12px;
+  border-bottom: none;
+}
+.ep-card:only-child {
+  border-radius: 12px;
+}
+.ep-card:hover {
+  background: rgba(255,255,255,.08);
+  transform: translateX(4px);
+}
+.ep-card__num {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  flex-shrink: 0;
+  min-width: 60px;
+  justify-content: center;
+}
+.ep-card__num-label {
+  font-size: 12px;
+  color: rgba(255,255,255,.4);
+}
+.ep-card__num-value {
+  font-family: 'EB Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--glow-cyan);
+  line-height: 1;
+}
+.ep-card__body {
+  flex: 1;
+  min-width: 0;
+}
+.ep-card__title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: rgba(255,255,255,.92);
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+.ep-card__excerpt {
+  font-size: 13px;
+  color: rgba(255,255,255,.45);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.ep-card__meta {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: rgba(255,255,255,.3);
+  margin-top: 8px;
+}
+.ep-card__arrow {
+  font-size: 18px;
+  color: rgba(255,255,255,.2);
+  flex-shrink: 0;
+  transition: color .25s ease, transform .25s ease;
+}
+.ep-card:hover .ep-card__arrow {
+  color: var(--glow-cyan);
+  transform: translateX(4px);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .sr__hero { padding: 100px 0 40px; }
+  .sr__title { margin-bottom: 12px; }
+  .sr__list { padding: 40px 0 60px; }
+  .ep-card { padding: 18px 16px; gap: 14px; }
+  .ep-card__num { min-width: 48px; }
+  .ep-card__num-value { font-size: 24px; }
+  .ep-card__title { font-size: 15px; }
+  .ep-card__excerpt { -webkit-line-clamp: 1; }
 }
