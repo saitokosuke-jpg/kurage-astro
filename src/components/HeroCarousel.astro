@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { CATEGORIES } from '../lib/categories';
+import JellyfishSvg from './JellyfishSvg.astro';
 
 interface SeriesSlide {
   series: CollectionEntry<'series'>;
@@ -14,7 +15,7 @@ interface Props {
 const { seriesSlides } = Astro.props;
 ---
 <section class="z z--hero" id="hero">
-  <div class="kj-icon kj-icon--1" aria-hidden="true"><img src="/img/kurage-icon.png" alt=""></div>
+  <div class="kj-icon kj-icon--1 kj-icon--shallow" aria-hidden="true"><JellyfishSvg /></div>
 
   <div class="hero-brand">
     <h1 class="hero-brand__title">KURAGE</h1>

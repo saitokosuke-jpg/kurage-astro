@@ -8,13 +8,13 @@
 
 /* ── DEEP SEA PALETTE — 水面→深海 ── */
 :root {
-  /* 深度グラデーション — 水面(水色) → 深海(濃紺) スクロールで深くなる */
-  --sea-0: #031a30;       /* 最深部: 深淵 */
-  --sea-1: #052540;       /* 深海 */
-  --sea-2: #083558;       /* 中深層 */
-  --sea-3: #0c4a78;       /* 中層 */
-  --sea-4: #106098;       /* 浅い層 */
-  --sea-surface: #2098d0; /* 水面直下: 明るい水色 */
+  /* 深度グラデーション — 水面(水色) → 深海(濃紺) 大胆なステップ */
+  --sea-0: #020e1a;       /* 最深部: ほぼ真っ黒 */
+  --sea-1: #041828;       /* 深海: 深い闇 */
+  --sea-2: #0a3060;       /* 中深層: 濃い紺 */
+  --sea-3: #1268a8;       /* 中層: 明確な青 */
+  --sea-4: #1a8ac8;       /* 浅い層: 鮮やかな青 */
+  --sea-surface: #38b0e8; /* 水面直下: 明るい水色 */
 
   /* 生物発光カラー */
   --glow-cyan: #00d4ff;
@@ -234,68 +234,159 @@ a.glow-link:hover::after { transform: scaleX(1); }
 
 
 /* ══════════════════════════════════
-   KURAGE JELLYFISH ICONS — 深海で発光
+   KURAGE SVG JELLYFISH — 深度で変化
    ══════════════════════════════════ */
+
+/* SVGクラゲ — 基本スタイル */
+.jellyfish-svg {
+  width: 100%; height: 100%;
+}
+.jf-bell {
+  fill: rgba(140,210,255,.12);
+  stroke: rgba(180,230,255,.2);
+  stroke-width: .8;
+}
+.jf-vein {
+  fill: none;
+  stroke: rgba(180,230,255,.08);
+  stroke-width: .5;
+}
+.jf-arm {
+  fill: none;
+  stroke: rgba(160,220,255,.1);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  animation: tentacle-sway 4s ease-in-out infinite;
+}
+.jf-arm:nth-child(4) { animation-delay: -0.5s; }
+.jf-arm:nth-child(5) { animation-delay: -1s; }
+.jf-arm:nth-child(6) { animation-delay: -1.5s; }
+.jf-arm:nth-child(7) { animation-delay: -2s; }
+.jf-tentacle {
+  fill: none;
+  stroke: rgba(140,200,255,.06);
+  stroke-width: .6;
+  stroke-linecap: round;
+  animation: tentacle-sway 5s ease-in-out infinite reverse;
+}
+.jf-core {
+  fill: rgba(0,212,255,.05);
+}
+
+@keyframes tentacle-sway {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(3px); }
+}
+
+/* 深度別 SVG クラゲスタイル */
+
+/* 浅い層: 透き通った水色のクラゲ */
+.kj-icon--shallow .jf-bell {
+  fill: rgba(140,210,255,.08);
+  stroke: rgba(180,230,255,.12);
+}
+.kj-icon--shallow .jf-arm { stroke: rgba(160,220,255,.06); }
+.kj-icon--shallow .jf-core { fill: rgba(0,212,255,.03); }
+
+/* 中層: やや見え始める */
+.kj-icon--mid .jf-bell {
+  fill: rgba(100,200,255,.15);
+  stroke: rgba(140,220,255,.25);
+}
+.kj-icon--mid .jf-vein { stroke: rgba(180,230,255,.12); }
+.kj-icon--mid .jf-arm { stroke: rgba(120,200,255,.15); }
+.kj-icon--mid .jf-core { fill: rgba(0,212,255,.08); }
+
+/* 深層: はっきり発光 */
+.kj-icon--deep .jf-bell {
+  fill: rgba(0,180,255,.18);
+  stroke: rgba(0,212,255,.35);
+}
+.kj-icon--deep .jf-vein { stroke: rgba(0,212,255,.2); }
+.kj-icon--deep .jf-arm { stroke: rgba(0,200,255,.25); }
+.kj-icon--deep .jf-tentacle { stroke: rgba(0,180,255,.12); }
+.kj-icon--deep .jf-core { fill: rgba(0,212,255,.2); }
+
+/* 最深部: 強く発光 — 生物発光 */
+.kj-icon--abyss .jf-bell {
+  fill: rgba(0,180,255,.22);
+  stroke: rgba(0,212,255,.45);
+}
+.kj-icon--abyss .jf-vein { stroke: rgba(0,212,255,.3); }
+.kj-icon--abyss .jf-arm { stroke: rgba(0,200,255,.3); stroke-width: 1.5; }
+.kj-icon--abyss .jf-tentacle { stroke: rgba(123,104,238,.15); }
+.kj-icon--abyss .jf-core {
+  fill: rgba(0,212,255,.35);
+  animation: core-pulse 3s ease-in-out infinite;
+}
+
+@keyframes core-pulse {
+  0%, 100% { fill: rgba(0,212,255,.2); r: 8; }
+  50% { fill: rgba(0,212,255,.45); r: 10; }
+}
+
+/* コンテナ — 位置・アニメーション */
 .kj-icon {
   position: absolute;
   pointer-events: none;
   user-select: none;
   z-index: 1;
-  animation: drift 12s ease-in-out infinite;
+  animation: drift 12s ease-in-out infinite, swim 6s ease-in-out infinite;
 }
-/* 浅い層: 透き通ったクラゲ（低opacity、影なし） */
+/* 浅い層: 透明感 */
 .kj-icon--shallow {
-  opacity: .12;
+  opacity: .25;
   filter: none;
 }
-/* 中層: やや光り始める */
+/* 中層: やや光る */
 .kj-icon--mid {
-  opacity: .2;
-  filter: drop-shadow(0 0 10px rgba(0,212,255,.15));
+  opacity: .35;
+  filter: drop-shadow(0 0 12px rgba(0,212,255,.15));
 }
-/* 深層: はっきり発光 */
+/* 深層: 発光 */
 .kj-icon--deep {
-  opacity: .3;
-  filter: drop-shadow(0 0 25px rgba(0,212,255,.4));
+  opacity: .5;
+  filter: drop-shadow(0 0 20px rgba(0,212,255,.35));
 }
-/* 最深部: 強く発光 */
+/* 最深部: 強い発光 */
 .kj-icon--abyss {
-  opacity: .4;
-  filter: drop-shadow(0 0 35px rgba(0,212,255,.5)) drop-shadow(0 0 60px rgba(123,104,238,.2));
+  opacity: .6;
+  filter: drop-shadow(0 0 30px rgba(0,212,255,.4)) drop-shadow(0 0 50px rgba(123,104,238,.15));
 }
-/* 各アイコンのアニメーション差 */
-.kj-icon--1 { animation-delay: 0s; }
-.kj-icon--2 { animation-delay: -3s; animation-duration: 15s; }
-.kj-icon--3 { animation-delay: -6s; animation-duration: 18s; }
-.kj-icon--4 { animation-delay: -1.5s; animation-duration: 14s; }
-.kj-icon--5 { animation-delay: -2s; animation-duration: 16s; }
-.kj-icon--6 { animation-delay: -4s; animation-duration: 13s; }
-.kj-icon--7 { animation-delay: -7s; animation-duration: 17s; }
+
+/* アニメーション差分 */
+.kj-icon--1 { animation-delay: 0s, -1s; }
+.kj-icon--2 { animation-delay: -3s, -2s; animation-duration: 15s, 7s; }
+.kj-icon--3 { animation-delay: -6s, -3s; animation-duration: 18s, 8s; }
+.kj-icon--4 { animation-delay: -1.5s, -0.5s; animation-duration: 14s, 5s; }
+.kj-icon--5 { animation-delay: -2s, -4s; animation-duration: 16s, 7.5s; }
+.kj-icon--6 { animation-delay: -4s, -2.5s; animation-duration: 13s, 6s; }
+.kj-icon--7 { animation-delay: -7s, -1.5s; animation-duration: 17s, 8.5s; }
 .kj-icon img {
   width: 100%; height: 100%;
   object-fit: contain;
 }
-/* 位置 — 左右交互に配置して奥行きを演出 */
-.kj-icon--1 { width: 180px; height: 180px; top: 8%; right: -15px; }
-.kj-icon--2 { width: 160px; height: 160px; bottom: -30px; left: -20px; }
-.kj-icon--3 { width: 200px; height: 200px; top: 15%; right: -30px; }
-.kj-icon--4 { width: 140px; height: 140px; top: 5%; left: -20px; }
-.kj-icon--5 { width: 170px; height: 170px; bottom: -20px; right: -25px; }
-.kj-icon--6 { width: 190px; height: 190px; top: 10%; left: -25px; }
-.kj-icon--7 { width: 220px; height: 220px; bottom: -15px; right: -20px; }
+/* 位置 */
+.kj-icon--1 { width: 140px; height: 180px; top: 8%; right: -10px; }
+.kj-icon--2 { width: 120px; height: 155px; bottom: -30px; left: -15px; }
+.kj-icon--3 { width: 150px; height: 195px; top: 15%; right: -25px; }
+.kj-icon--4 { width: 100px; height: 130px; top: 5%; left: -15px; }
+.kj-icon--5 { width: 130px; height: 165px; bottom: -20px; right: -20px; }
+.kj-icon--6 { width: 140px; height: 180px; top: 10%; left: -20px; }
+.kj-icon--7 { width: 160px; height: 210px; bottom: -15px; right: -15px; }
 
 @media (max-width: 768px) {
-  .kj-icon--shallow { opacity: .08; }
-  .kj-icon--mid { opacity: .12; }
-  .kj-icon--deep { opacity: .18; }
-  .kj-icon--abyss { opacity: .25; }
-  .kj-icon--1 { width: 100px; height: 100px; top: 5%; right: -10px; }
-  .kj-icon--2 { width: 80px; height: 80px; bottom: -10px; left: -10px; }
-  .kj-icon--3 { width: 90px; height: 90px; top: 10%; right: -15px; }
-  .kj-icon--4 { width: 70px; height: 70px; top: 3%; left: -10px; }
-  .kj-icon--5 { width: 80px; height: 80px; bottom: -10px; right: -15px; }
-  .kj-icon--6 { width: 90px; height: 90px; top: 8%; left: -10px; }
-  .kj-icon--7 { width: 100px; height: 100px; bottom: -10px; right: -10px; }
+  .kj-icon--shallow { opacity: .15; }
+  .kj-icon--mid { opacity: .2; }
+  .kj-icon--deep { opacity: .3; }
+  .kj-icon--abyss { opacity: .4; }
+  .kj-icon--1 { width: 80px; height: 100px; top: 5%; right: -8px; }
+  .kj-icon--2 { width: 65px; height: 85px; bottom: -10px; left: -8px; }
+  .kj-icon--3 { width: 75px; height: 95px; top: 10%; right: -12px; }
+  .kj-icon--4 { width: 55px; height: 70px; top: 3%; left: -8px; }
+  .kj-icon--5 { width: 65px; height: 85px; bottom: -10px; right: -12px; }
+  .kj-icon--6 { width: 75px; height: 95px; top: 8%; left: -8px; }
+  .kj-icon--7 { width: 85px; height: 110px; bottom: -10px; right: -8px; }
 }
 
 

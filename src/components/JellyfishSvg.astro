@@ -1,0 +1,25 @@
+---
+/**
+ * SVGクラゲ — 深度に応じてスタイルが変わる
+ * CSS変数で色・glowを制御
+ */
+---
+<svg class="jellyfish-svg" viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 傘 (bell) -->
+  <ellipse class="jf-bell" cx="60" cy="48" rx="42" ry="38" />
+  <!-- 傘の模様 -->
+  <path class="jf-vein" d="M36 52 Q48 28 60 52" />
+  <path class="jf-vein" d="M50 50 Q60 26 70 50" />
+  <path class="jf-vein" d="M60 52 Q72 28 84 52" />
+  <!-- 触腕 (oral arms) -->
+  <path class="jf-arm" d="M38 56 Q32 90 36 120 Q38 135 34 155" />
+  <path class="jf-arm" d="M50 60 Q46 95 50 125 Q52 140 48 158" />
+  <path class="jf-arm" d="M60 62 Q58 100 60 130 Q60 145 58 160" />
+  <path class="jf-arm" d="M70 60 Q74 95 70 125 Q68 140 72 158" />
+  <path class="jf-arm" d="M82 56 Q88 90 84 120 Q82 135 86 155" />
+  <!-- 細い触手 (tentacles) -->
+  <path class="jf-tentacle" d="M28 50 Q22 80 26 110 Q28 130 24 150" />
+  <path class="jf-tentacle" d="M92 50 Q98 80 94 110 Q92 130 96 150" />
+  <!-- 内部の光の点 -->
+  <circle class="jf-core" cx="60" cy="40" r="8" />
+</svg>
